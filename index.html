@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cycles</title>
+    <style> body {padding: 0; margin: 1;} </style>
+    <script src="../p5.min.js"></script>
+    <script src="../addons/p5.dom.min.js"></script>
+    <script src="../addons/p5.sound.min.js"></script>
+    <script src="grid.js"></script>
+    <script src="agent.js"></script>
+    <script src="sketch.js"></script>
+    <style>
+    #instructions {
+      max-width: 900px;
+    }
+    #yellowContainer {
+      background-color: yellow;
+      max-width: 600px;
+    }
+    #magentaContainer {
+      background-color: magenta;
+      max-width: 600px;
+    }
+    #cyanContainer {
+      background-color: cyan;
+      max-width: 600px;
+    }
+    </style>
+  </head>
+  <body>
+    <div id='instructions'>
+      <h2>Instructions</h2>
+      When you hit run, your ship will appear on the blue square facing north.
+      When you enter a square with a circle, the ship's program will be set to
+      the corresponding color's program. Write the program by entering the
+      characters 'F', 'R' and 'L' separated by commas. 'F' means go forward,
+      'R' means turn right and 'L' means turn left. The ship will carry out
+      these commands in sequence, looping back to the first command if it runs
+      out. When it lands on a circle and switches programs, it always starts
+      from the start of the sequence, even if it was in the middle and even if
+      it landed on the color of the program it was already running.
+      <br><br>
+      Try to land on the green square with the shortest (fewest instructions)
+      program possible. If you try to move into a wall (dark grey) square, you
+      will not move. If you move onto a lava (red) square, you fail the level.
+      <br><br>
+    </div>
+    <div id='canvasContainer'></div>
+    <div id='yellowContainer'></div>
+    <div id='magentaContainer'></div>
+    <div id='cyanContainer'></div>
+    <div id='buttonContainer'></div>
+    <div id='levelContainer'></div>
+    <div id='credits'>
+      <h2>Sound Credits</h2>
+      <a href="https://freesound.org/people/LittleRobotSoundFactory/sounds/270330/" target="_blank">"Jingle_Achievement_01"</a> by LittleRobotSoundFactory<br>
+      <a href="https://freesound.org/people/LittleRobotSoundFactory/sounds/270311/" target="_blank">"Explosion_03"</a> by LittleRobotSoundFactory<br>
+      Other sounds composed in <a href="https://www.bfxr.net/" target="_blank">BFXR</a>
+    </div>
+  </body>
+</html>
