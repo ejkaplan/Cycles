@@ -9,7 +9,8 @@ let level_order = [
   "salmon_ladder.json",
   "polkadots.json",
   "fork_in_the_road.json",
-  "polka_explosion.json"
+  "roundabouts.json",
+  "guess_and_check.json"
 ]
 let json = [];
 let level = 0;
