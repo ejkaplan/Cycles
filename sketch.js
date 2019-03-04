@@ -1,5 +1,16 @@
 let grid;
 let agent;
+let level_order = [
+  "straight_line.json",
+  "two_color_corner.json",
+  "one_color_corner.json",
+  "spiral.json",
+  "spoon.json",
+  "salmon_ladder.json",
+  "polkadots.json",
+  "fork_in_the_road.json",
+  "polka_explosion.json"
+]
 let json = [];
 let level = 0;
 let editor = false;
@@ -8,14 +19,15 @@ let runButton, stopButton, saveButton, sizeUpButton, sizeDownButton;
 let prevButton, nextButton;
 let jingleSnd, explosionSnd, moveSnd, wallSnd;
 let size = 7;
+let programLength = 0;
 
 function preload() {
   jingleSnd = loadSound("sounds/jingle.wav");
   explosionSnd = loadSound("sounds/explosion.wav");
   moveSnd = loadSound("sounds/move.wav");
   wallSnd = loadSound("sounds/wall.wav");
-  for (let i = 0; i < 6; i++) {
-    let f = "levels/level_" + i + ".json";
+  for (let fname of level_order) {
+    let f = "levels/"+fname;
     console.log(f);
     json.push(loadJSON(f))
   }

@@ -3,13 +3,14 @@ var SwitchEnum = Object.freeze({empty:1, yellow:2, magenta:3, cyan:4})
 
 class Grid {
 
-  constructor(rows, cols) {
+  constructor(rows, cols, par=0) {
     this.grid = [];
     this.switches = [];
     this.cellWidth = width/cols;
     this.cellHeight = height/rows;
     this.nextChangeTime = 0;
     this.solved = false;
+    this.par = par;
     for (let r = 0; r < rows; r++) {
       this.grid[r] = [];
       this.switches[r] = [];
@@ -67,7 +68,7 @@ class Grid {
   }
 
   saveGrid() {
-    let json = {grid:this.grid, switches:this.switches};
+    let json = {par: this.par, grid:this.grid, switches:this.switches};
     saveJSON(json, "level.json");
   }
 
@@ -88,7 +89,7 @@ class Grid {
       col >= 0 && col < this.grid[0].length;
   }
 
-  startProgram() {
+  startProgram(programs=null) {
     let agentStartR = -1, agentStartC = -1;
     for (let r = 0; r < this.grid.length; r++) {
       for (let c = 0; c < this.grid[r].length; c++) {
@@ -98,15 +99,30 @@ class Grid {
         }
       }
     }
-    if (agentStartR > 0 && agentStartC > 0)
-      agent = new Agent(this, agentStartR, agentStartC);
+    if (programs == null) {
+      programs = []
+      let fields = [yProgram, mProgram, cProgram];
+      for (let x of fields) {
+        programs.push(x.value().toLowerCase().split(","));
+      }
+    }
+    programLength = 0;
+    for (let x of programs) {
+      for (let com of x) {
+        if (com.length > 0) programLength++;
+      }
+    }
+    select("#parContainer").html("<h2>Par: "+this.par+", You: " + programLength + "</h2>");
+    if (agentStartR >= 0 && agentStartC >= 0)
+      agent = new Agent(this, agentStartR, agentStartC, programs);
   }
 
 }
 
 function gridFromJSON(lvl) {
-  let gr = lvl.grid, sw = lvl.switches;
-  let grid = new Grid(gr.length, gr[0].length);
+  let gr = lvl.grid, sw = lvl.switches, par=lvl.par;
+  let grid = new Grid(gr.length, gr[0].length, par);
+  select("#parContainer").html("<h2>Par: "+par+", You: " + programLength + "</h2>");
   grid.grid = gr;
   grid.switches = sw;
   return grid;

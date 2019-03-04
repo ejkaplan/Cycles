@@ -2,7 +2,7 @@ var DirEnum = Object.freeze({north:1, east:2, south:3, west:4})
 
 class Agent {
 
-  constructor(grid, row, col) {
+  constructor(grid, row, col, programs) {
     this.grid = grid;
     this.row = row;
     this.col = col;
@@ -11,11 +11,7 @@ class Agent {
     this.nextChangeTime = millis() + 500;
     this.mode = this.grid.switchAt(this.row, this.col);
     this.step = 0;
-    this.programs = []
-    let fields = [yProgram, mProgram, cProgram];
-    for (let x in fields) {
-      this.programs.push(fields[x].value().toLowerCase().split(","));
-    }
+    this.programs = programs
   }
 
   update() {
